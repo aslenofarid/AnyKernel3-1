@@ -42,6 +42,9 @@ patch_vbmeta_flag=auto;
 set_perm_recursive 0 0 755 644 $ramdisk/*;
 set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 
+# Put Android Version on cmdline
+android_ver=$(file_getprop /system/build.prop ro.build.version.release);
+patch_cmdline androidboot.version androidboot.version=$android_ver
 
 ## AnyKernel boot install
 dump_boot;
