@@ -45,6 +45,17 @@ set_perm_recursive 0 0 750 750 $ramdisk/init* $ramdisk/sbin;
 ## AnyKernel install
 dump_boot;
 
+# begin EAS patch changes
+if [ ! -e "/vendor/etc/powerhint.json" ]; then
+    ui_print " " "Hmm...HMP rom installed"
+    ui_print "Installing EAS PerfHAL..."
+    rm -rf /data/adb/modules/SDM660PerfHAL;
+    cp -rf $home/tools/SDM660PerfHAL /data/adb/modules/SDM660PerfHAL;
+else
+    ui_print " " "You installed EAS rom"
+    ui_print "So install EAS PerHal no required"
+fi
+
 # begin ramdisk changes
 
 # init.rc
